@@ -1,0 +1,56 @@
+# Val_loss:-3.0733, train_loass:-3.1326, epoch:456
+
+# -------------------------------------------------------------------
+# 神经网络参数
+# -------------------------------------------------------------------
+Network_mode: CNN3              #UN/CNN
+epochs: 50
+learning_rate: 0.001
+batch_size: 1000
+TotalNum: 800000
+num_workers: 8
+pin_memory: True
+earlystopping_patience: 20
+reducelr_patience: 8
+activation_function: Sigmoid  #Sigmoid/Tanh
+CNN_hidden_dim1: 256
+CNN_hidden_dim2: 512
+device: cuda:0
+
+
+# -------------------------------------------------------------------
+# IRS系统参数
+# -------------------------------------------------------------------
+Nt: 4               #发端天线
+Nr: 2               #收端天线
+Ne: 2               #窃听者天线
+Ns: 24              #反射面元件数
+sigma_e: 1          #噪声
+beta: 0.8           #He的大尺度衰落因子
+alpha: 0.8          #Ge的大尺度衰落因子
+
+
+# -------------------------------------------------------------------
+# 测试类别：根据想要的结果选择SNRmode/Rsmode
+# -------------------------------------------------------------------
+mode: Nsmode   
+
+SNRmode:
+  RsNum: 3
+  SNRdB: list(range(-5, 21))
+
+Rsmode:
+  RsNum: list(range(2, 11))
+  SNRdB: 10
+
+Nsmode:
+  RsNum: 3
+  SNRdB: 10
+
+
+# -------------------------------------------------------------------
+# 存储读取路径
+# -------------------------------------------------------------------
+model_path: './model'       #模型保存路径
+result_path: './result'     #结果保存路径
+dataFile: './data/TestData_Nt=4_Nr=2_Ns=24_Ne=2_dataNum=100.mat'   #测试数据路径
